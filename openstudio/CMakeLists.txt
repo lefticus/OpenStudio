@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.7 )
  
-PROJECT(OpenStudioCore)
+PROJECT(OpenStudio)
 
 ###############################################################################
 # Project version information
@@ -17,7 +17,7 @@ SET(ENERGYPLUS_VERSION "8.0" CACHE INTERNAL "EnergyPlus Version")
 SET(DAKOTA_VERSION "5.3.1")
 
 # configure file with version information
-CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/OpenStudio.in ${CMAKE_BINARY_DIR}/src/OpenStudio.hxx )
+CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/OpenStudio.hxx.in ${CMAKE_BINARY_DIR}/src/OpenStudio.hxx )
 
 # universal configuration for mac plists
 IF( APPLE )
@@ -828,7 +828,7 @@ endif( BUILD_DOCUMENTATION )
 
 
 ###############################################################################
-# Export targets and generate OpenStudioCoreConfig.cmake
+# Export targets and generate OpenStudioConfig.cmake
 
 set(TARGETS_FILE ${CMAKE_BINARY_DIR}/OpenStudioTargets.cmake)
 
@@ -872,8 +872,8 @@ export(TARGETS openstudio_runmanager
                ${ALL_RUBY_BINDING_TARGETS}
        FILE "${TARGETS_FILE}")
 
-configure_file("${CMAKE_SOURCE_DIR}/OpenStudioCoreConfig.cmake.in"
-  "${CMAKE_BINARY_DIR}/OpenStudioCoreConfig.cmake" @ONLY)
+configure_file("${CMAKE_SOURCE_DIR}/OpenStudioConfig.cmake.in"
+  "${CMAKE_BINARY_DIR}/OpenStudioConfig.cmake" @ONLY)
 
 
 IF( UNIX AND NOT APPLE ) 
