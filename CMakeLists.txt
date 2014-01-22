@@ -29,8 +29,8 @@ OPTION( NIGHTLY_BUILD "Use configurations for Nightly Build" OFF )
 
 SET(OPENSTUDIO_VERSION "${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}.${CMAKE_VERSION_PATCH}")
 
-# Search for modules in the openstudiocore dir first to override cmake ones 
-LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/openstudiocore/CMake" ${CMAKE_SOURCE_DIR})
+# Search for modules in the openstudio dir first to override cmake ones 
+LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/openstudio/CMake" ${CMAKE_SOURCE_DIR})
 
 # Build C++ documentation using Doxygen
 # Requires: doxygen
@@ -687,7 +687,7 @@ ExternalProject_Add( vtkCharts
   )
 
 
-set(OpenStudioCore_DIR ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build)
+set(OpenStudio_DIR ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build)
 
 set(BoostLog_DIR "${CMAKE_BINARY_DIR}/BoostLog-prefix/src/BoostLog-build")
 set(QJSON_DIR "${CMAKE_BINARY_DIR}/QJSON-prefix/src/QJSON-build")
@@ -695,40 +695,40 @@ set(QJSON_DIR "${CMAKE_BINARY_DIR}/QJSON-prefix/src/QJSON-build")
 set(VTK_CHARTS_LIB_DIR ${CMAKE_BINARY_DIR}/vtkCharts-prefix/src/vtkCharts-build)
 set(VTK_CHARTS_INCLUDE_DIR ${CMAKE_BINARY_DIR}/vtkCharts-prefix/src/)
 
-# Set up the dependencies for OpenStudioCore
-SET(OpenStudioCore_DEPENDS vtkCharts)
-LIST(APPEND OpenStudioCore_DEPENDS BoostLog)
-LIST(APPEND OpenStudioCore_DEPENDS GoogleTest)
-LIST(APPEND OpenStudioCore_DEPENDS QJSON)
+# Set up the dependencies for OpenStudio
+SET(OpenStudio_DEPENDS vtkCharts)
+LIST(APPEND OpenStudio_DEPENDS BoostLog)
+LIST(APPEND OpenStudio_DEPENDS GoogleTest)
+LIST(APPEND OpenStudio_DEPENDS QJSON)
 
 IF(BUILD_QT)
-  LIST(APPEND OpenStudioCore_DEPENDS Qt)
+  LIST(APPEND OpenStudio_DEPENDS Qt)
 ENDIF()
 
 IF(BUILD_SWIG)
-  LIST(APPEND OpenStudioCore_DEPENDS SWIG)
+  LIST(APPEND OpenStudio_DEPENDS SWIG)
 ENDIF()
 
 IF(BUILD_BOOST)
-  LIST(APPEND OpenStudioCore_DEPENDS Boost)
+  LIST(APPEND OpenStudio_DEPENDS Boost)
 ENDIF()
 
 IF(BUILD_RUBY)
-  LIST(APPEND OpenStudioCore_DEPENDS Ruby)
+  LIST(APPEND OpenStudio_DEPENDS Ruby)
 ENDIF()
 
 IF(BUILD_NODE)
-  LIST(APPEND OpenStudioCore_DEPENDS Node)
+  LIST(APPEND OpenStudio_DEPENDS Node)
 ENDIF()
 
 IF(BUILD_V8)
-  LIST(APPEND OpenStudioCore_DEPENDS V8)
+  LIST(APPEND OpenStudio_DEPENDS V8)
 ENDIF()
 
 
-ExternalProject_Add( OpenStudioCore
-  DEPENDS ${OpenStudioCore_DEPENDS}
-  SOURCE_DIR ${CMAKE_SOURCE_DIR}/openstudiocore
+ExternalProject_Add( OpenStudio
+  DEPENDS ${OpenStudio_DEPENDS}
+  SOURCE_DIR ${CMAKE_SOURCE_DIR}/openstudio
   CMAKE_CACHE_ARGS
     -DvtkCharts_USE_QT:BOOL=ON
     -DVTK_DIR:PATH=${VTK_DIR}
@@ -790,61 +790,61 @@ ExternalProject_Add( OpenStudioCore
 
 if (BUILD_QT AND MSVC)
   # Install Qt DLL's to Release directory. This is brute force-ish, it copies all files in the bin folder
-  ExternalProject_Add_Step(OpenStudioCore InstallQtReleaseDLLs
-     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/Qt-prefix/src/Qt-install/bin ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/Release
+  ExternalProject_Add_Step(OpenStudio InstallQtReleaseDLLs
+     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/Qt-prefix/src/Qt-install/bin ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/Release
      DEPENDERS configure
    )     
    
   # Install Qt DLL's to Debug directory. This is brute force-ish, it copies all files in the bin folder
-  ExternalProject_Add_Step(OpenStudioCore InstallQtDebugDLLs
-     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/Qt-prefix/src/Qt-install/bin ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/Debug
+  ExternalProject_Add_Step(OpenStudio InstallQtDebugDLLs
+     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/Qt-prefix/src/Qt-install/bin ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/Debug
      DEPENDERS configure
    )     
 endif()
 
 if (BUILD_RUBY AND MSVC)
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyReleaseFolder
-     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/Release
+  ExternalProject_Add_Step(OpenStudio MakeRubyReleaseFolder
+     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/Release
      DEPENDERS configure
    )     
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyDebugFolder
-   COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/Debug
+  ExternalProject_Add_Step(OpenStudio MakeRubyDebugFolder
+   COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/Debug
      DEPENDERS configure
    )     
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyRelWithDebInfoFolder
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/RelWithDebInfo
+  ExternalProject_Add_Step(OpenStudio MakeRubyRelWithDebInfoFolder
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/RelWithDebInfo
      DEPENDERS configure
    )     
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyMinSizeRelFolder
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/MinSizeRel
+  ExternalProject_Add_Step(OpenStudio MakeRubyMinSizeRelFolder
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/MinSizeRel
      DEPENDERS configure
    )     
 
    
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyReleaseDLL
-    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/Release/${RUBY_DLL}"
+  ExternalProject_Add_Step(OpenStudio MakeRubyReleaseDLL
+    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/Release/${RUBY_DLL}"
      DEPENDERS configure
    )     
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyDebugDLL
-    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/Debug/${RUBY_DLL}"
+  ExternalProject_Add_Step(OpenStudio MakeRubyDebugDLL
+    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/Debug/${RUBY_DLL}"
      DEPENDERS configure
    )     
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyRelWithDebInfoDLL
-    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/RelWithDebInfo/${RUBY_DLL}"
+  ExternalProject_Add_Step(OpenStudio MakeRubyRelWithDebInfoDLL
+    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/RelWithDebInfo/${RUBY_DLL}"
      DEPENDERS configure
    )     
-  ExternalProject_Add_Step(OpenStudioCore MakeRubyMinSizeRelDLL
-    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products/MinSizeRel/${RUBY_DLL}"
+  ExternalProject_Add_Step(OpenStudio MakeRubyMinSizeRelDLL
+    COMMAND ${CMAKE_COMMAND} -E copy "${RUBY_DLLPATH}" "${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products/MinSizeRel/${RUBY_DLL}"
      DEPENDERS configure
    )     
       
 endif()
 
 
-set(OPENSTUDIOCORE_BUILD_DIR ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build)
-set(OPENSTUDIOCORE_LIB_DIR ${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/Products)
-set(OPENSTUDIOCORE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/openstudiocore/src)
-set(OPENSTUDIOCORE_ROOT_DIR ${CMAKE_SOURCE_DIR}/openstudiocore/)
+set(OPENSTUDIO_BUILD_DIR ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build)
+set(OPENSTUDIO_LIB_DIR ${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/Products)
+set(OPENSTUDIO_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/openstudio/src)
+set(OPENSTUDIO_ROOT_DIR ${CMAKE_SOURCE_DIR}/openstudio/)
 
 ###############################################################################
 # Use CPack

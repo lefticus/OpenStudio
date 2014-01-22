@@ -160,10 +160,13 @@ SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Products" )
 SET ( LIBRARY_SEARCH_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/Release" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/Debug" )
 
 # Include project specific macros
-INCLUDE(ProjectMacros.cmake)
+INCLUDE(../ProjectMacros.cmake)
 
 # Search for modules in the root dir first to override cmake ones 
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
+
+# Search for modules in the top level dir  
+LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/..")
 
 # Use CTest
 IF( BUILD_TESTING )
