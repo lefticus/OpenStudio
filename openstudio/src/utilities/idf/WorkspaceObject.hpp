@@ -170,6 +170,18 @@ typedef std::vector<WorkspaceObject> WorkspaceObjectVector;
  *  Outputs WorkspaceObject as (IDF) text. */
 UTILITIES_API std::ostream& operator<<(std::ostream& os, const WorkspaceObject& workspaceObject);
 
+
+// sorts WorkspaceObjects by name
+struct COREUTILITIES_API WorkspaceObjectNameLess {
+  bool operator()(const WorkspaceObject& a, const WorkspaceObject& b) const;
+};
+
+// sorts WorkspaceObjects by name
+struct COREUTILITIES_API WorkspaceObjectNameGreater {
+  bool operator()(const WorkspaceObject& a, const WorkspaceObject& b) const;
+};
+
+
 } // openstudio
 
 #endif // UTILITIES_IDF_WORKSPACEOBJECT_HPP

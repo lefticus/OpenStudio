@@ -1360,4 +1360,35 @@ std::ostream& operator<<(std::ostream& os, const WorkspaceObject& workspaceObjec
   return os;
 }
 
+
+bool WorkspaceObjectNameLess::operator()(const WorkspaceObject& a, const WorkspaceObject& b) const
+{
+  std::string aname;
+  boost::optional<std::string> oaname = a.name();
+  if (oaname){
+    aname = *oaname;
+  }
+  std::string bname;
+  boost::optional<std::string> obname = b.name();
+  if (obname){
+    bname = *obname;
+  }
+  return istringLess(aname, bname);
+}
+
+bool WorkspaceObjectNameGreater::operator()(const WorkspaceObject& a, const WorkspaceObject& b) const
+{
+  std::string aname;
+  boost::optional<std::string> oaname = a.name();
+  if (oaname){
+    aname = *oaname;
+  }
+  std::string bname;
+  boost::optional<std::string> obname = b.name();
+  if (obname){
+    bname = *obname;
+  }
+  return istringLess(bname, aname);
+}
+
 } // openstudio
