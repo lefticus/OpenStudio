@@ -20,7 +20,7 @@
 #include <utilities/core/UpdateManager.hpp>
 #include <utilities/core/Assert.hpp>
 #include <utilities/core/Application.hpp>
-#include <OpenStudio.hxx>
+#include <OpenStudioCore.hxx>
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>

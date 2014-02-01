@@ -39,7 +39,7 @@
 #include "../model/RefrigerationSubcoolerMechanical_Impl.hpp"
 #include "../model/RefrigerationSubcoolerLiquidSuction.hpp"
 #include "../model/RefrigerationSubcoolerLiquidSuction_Impl.hpp"
-#include "../utilities/core/Compare.hpp"
+#include <utilities/core/Compare.hpp>
 #include "../shared_gui_components/GraphicsItems.hpp"
 #include <QGraphicsScene>
 #include <QGraphicsView>

@@ -11,8 +11,7 @@
 
 %include <utilities/core/CommonInclude.i>
 %import <utilities/core/CommonImport.i>
-%import <utilities/UtilitiesCore.i>
-%import <utilities/UtilitiesUnits.i>
+%import <utilities/CoreUtilities.i>
 
 %include <utilities/idd/Idd.i>
 

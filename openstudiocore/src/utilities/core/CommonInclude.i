@@ -25,6 +25,9 @@
 
 %include <utilities/core/Macro.hpp>
 
+#define COREUTILITIES_API
+#define UTILITIES_API
+
 #define BOOST_SERIALIZATION_ASSUME_ABSTRACT(T) 
 
 #define BOOST_CLASS_EXPORT_GUID(T,K) 

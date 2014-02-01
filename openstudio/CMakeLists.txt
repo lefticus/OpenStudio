@@ -116,6 +116,14 @@ IF(MSVC)
   MARK_AS_ADVANCED( BUILD_WITH_MULTIPLE_PROCESSES )
 ENDIF()
 
+
+# Point to OpenStudio
+# SET( OPENSTUDIOCORE_BUILD_DIR "" CACHE PATH "Build or install directory for OpenStudio build to link against")
+find_package(OpenStudioCore REQUIRED)
+#INCLUDE ( "${OPENSTUDIOCORE_BUILD_DIR}/OpenStudioCoreConfig.cmake" )
+
+INCLUDE_DIRECTORIES(${OpenStudioCore_INCLUDE_DIRS})
+
 ###############################################################################
 
 ###############################################################################
@@ -521,9 +529,6 @@ IF( UNIX )
   MARK_AS_ADVANCED( CMAKE_THREAD_LIBS )
 ENDIF( UNIX )
 
-# Zlib
-INCLUDE_DIRECTORIES( SYSTEM src/zlib )
-ADD_SUBDIRECTORY( src/zlib )
 
 # Google test library
 ADD_DEFINITIONS( -DGTEST_HAS_TR1_TUPLE=0 )
@@ -700,10 +705,6 @@ include_directories( SYSTEM src/litesql/include src/litesql/library ${CMAKE_BINA
 add_subdirectory( src/litesql )
 ################################################################################
 
-################################################################################
-## sqlite
-add_subdirectory( src/sqlite )
-################################################################################
 
 ###############################################################################
 # Add to include path
@@ -865,8 +866,6 @@ export(TARGETS openstudio_runmanager
                ${QTWINMIGRATE_EXPORT}
                zkexpat
                zkqwt
-               miniziplib
-               sqlite
                litesql
                litesql-util
                ${ALL_RUBY_BINDING_TARGETS}

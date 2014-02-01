@@ -16,7 +16,7 @@
   
   #include <utilities/math/FloatCompare.hpp>
   
-  #include <OpenStudio.hxx>
+  #include <OpenStudioCore.hxx>
   #include <QAction>
 %}
 
@@ -24,7 +24,7 @@
 %include <utilities/core/Enum.i>
 //%include <utilities/core/Exception.i> // moved ahead in include order in CommonInclude
 %include <utilities/core/Path.i>
-%include <OpenStudio.hxx>
+%include <OpenStudioCore.hxx>
 %include <utilities/core/ApplicationPathHelpers.hpp>
 %include <utilities/core/PathWatcher.i>
 %include <utilities/core/String.hpp>

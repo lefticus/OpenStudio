@@ -7,12 +7,13 @@
 #endif
 
 
+#define COREUTILITIES_API
 #define UTILITIES_API
 #define UTILITIES_TEMPLATE_EXT
 
 %include <utilities/core/CommonInclude.i>
 %import <utilities/core/CommonImport.i> 
-%import <utilities/UtilitiesCore.i>
+%import <utilities/CoreUtilities.i>
 %import <utilities/UtilitiesSql.i>
 
 //Ignore common stream related functions
@@ -34,6 +35,9 @@
   namespace openstudio{}
   using namespace openstudio;
 
+  #include <utilities/bcl/BCL.hpp>
+  #include <utilities/bcl/LocalBCL.hpp>
+  #include <utilities/bcl/RemoteBCL.hpp>
   #include <utilities/core/Application.hpp>
   #include <QAction> 
 %}

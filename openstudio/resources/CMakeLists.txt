@@ -10,21 +10,6 @@ CONFIGURE_FILE( "IdfFilesToTransition.lst.in" "${CMAKE_BINARY_DIR}/resources/Idf
 SET(ENERGYPLUS_OUTPUTS "")
 
 SET(utilities_resources_src
-  "utilities/BCL/Components/philadelphia pa [724086 TMY2-13739]/component.xml"
-  "utilities/BCL/Components/philadelphia pa [724086 TMY2-13739]/files/USA_PA_Philadelphia_TMY2.epw"
-  "utilities/BCL/Components/philadelphia pa [724086 TMY2-13739]/images/noimage_100px.png"
-  utilities/BCL/Measures/SetWindowToWallRatioByFacade/measure.xml
-  utilities/BCL/Measures/SetWindowToWallRatioByFacade/measure.rb
-  utilities/BCL/Measures/SetWindowToWallRatioByFacade/tests/ExampleModel_Test.rb
-  utilities/BCL/Measures/SetWindowToWallRatioByFacade/tests/SimpleModel_Test.rb
-  utilities/BCL/Measures/SetWindowToWallRatioByFacade/tests/SimpleModel.osm
-  utilities/BCL/Measures/TestCreateWarningMsgs/measure.rb
-  utilities/BCL/Measures/TestCreateWarningMsgs/measure.xml
-  utilities/BCL/Measures/TestFlagAsNotApplicable/measure.rb
-  utilities/BCL/Measures/TestFlagAsNotApplicable/measure.xml
-  utilities/BCL/Measures/TestMissingARequiredArgWithNoDefault/measure.rb
-  utilities/BCL/Measures/TestMissingARequiredArgWithNoDefault/measure.xml
-  utilities/Checksum/Checksum.txt
   utilities/Filetypes/USA_CO_Golden-NREL.724666_TMY3.epw
   utilities/Filetypes/USA_CO_Golden-NREL.wrap.epw
   utilities/Filetypes/USA_CO_Golden-NREL.amy
@@ -39,7 +24,6 @@ SET(utilities_resources_src
   utilities/Idf/MixedLineEndingTest.idf
   utilities/Idf/FormatPropertyTest_Formatted.idf
   utilities/Idf/FormatPropertyTest_Unformatted.idf
-  utilities/Zip/test1.zip
 )
 
 # update the resources

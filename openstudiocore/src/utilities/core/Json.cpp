@@ -25,7 +25,7 @@
 #include <utilities/core/PathHelpers.hpp>
 #include <utilities/core/String.hpp>
 
-#include <OpenStudio.hxx>
+#include <OpenStudioCore.hxx>
 
 #include <qjson/serializer.h>
 #include <qjson/parser.h>

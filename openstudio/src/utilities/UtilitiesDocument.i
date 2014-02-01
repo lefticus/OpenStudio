@@ -6,12 +6,13 @@
 #endif
 
 
+#define COREUTILITIES_API
 #define UTILITIES_API
 #define UTILITIES_TEMPLATE_EXT
 
 %include <utilities/core/CommonInclude.i>
 %import <utilities/core/CommonImport.i> 
-%import <utilities/UtilitiesUnits.i>
+%import <utilities/CoreUtilities.i>
 
 //Ignore common stream related functions
 //that will not be supported by SWIG

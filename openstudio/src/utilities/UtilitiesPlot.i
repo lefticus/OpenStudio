@@ -11,7 +11,7 @@
 
 %include <utilities/core/CommonInclude.i>
 %import <utilities/core/CommonImport.i>
-%import <utilities/UtilitiesData.i>
+%import <utilities/CoreUtilities.i>
 
 //Ignore common stream related functions
 //that will not be supported by SWIG
@@ -33,6 +33,9 @@
   namespace openstudio{}
   using namespace openstudio;
 
+  #include <utilities/bcl/BCL.hpp>
+  #include <utilities/bcl/LocalBCL.hpp>
+  #include <utilities/bcl/RemoteBCL.hpp>
   #include <utilities/core/Application.hpp>
   #include <utilities/idf/IdfObject.hpp>
   #include <utilities/idf/WorkspaceObject.hpp>

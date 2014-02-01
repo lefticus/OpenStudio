@@ -28,7 +28,7 @@
 #include <utilities/data/Attribute.hpp>
 #include <utilities/core/Assert.hpp>
 
-#include <OpenStudio.hxx>
+#include <OpenStudioCore.hxx>
 
 #include <QDir>
 #include <QDomDocument>
