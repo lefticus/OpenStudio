@@ -48,16 +48,16 @@ void logBeforeAndAfterPathInformation(const std::string& functionName,
 
 TEST_F(CoreFixture, Path_CompletePathToFile)
 {
-  path p = resourcesPath()/toPath("energyplus/5ZoneAirCooled/eplusout");
-  path result = completePathToFile(p,path(),"sql");
-  logBeforeAndAfterPathInformation("completePathToFile with ext=\"sql\"",p,result);
-  path tmp = p.replace_extension(toPath("sql").string());
+  path p = resourcesPath()/toPath("utilities/Zip/test1");
+  path result = completePathToFile(p,path(),"zip");
+  logBeforeAndAfterPathInformation("completePathToFile with ext=\"zip\"",p,result);
+  path tmp = p.replace_extension(toPath("zip").string());
   EXPECT_TRUE(result == tmp);
 
-  p = toPath("energyplus/5ZoneAirCooled/eplusout");
+  p = toPath("utilities/Zip/test1");
   path base = resourcesPath();
-  result = completePathToFile(p,base,"sql");
-  logBeforeAndAfterPathInformation("completePathToFile with base=resourcesPath() and ext=\"sql\"",p,result);
+  result = completePathToFile(p,base,"zip");
+  logBeforeAndAfterPathInformation("completePathToFile with base=resourcesPath() and ext=\"zip\"",p,result);
   EXPECT_TRUE(result == tmp);
 
   p = resourcesPath()/toPath("energyplus/5ZoneAirCooled.idf");
@@ -84,26 +84,26 @@ TEST_F(CoreFixture, Path_RelativePathToFile)
 TEST_F(CoreFixture, Path_SetFileExtension)
 {
   // example usage for assigning proper file extension
-  path p = resourcesPath()/toPath("energyplus/5ZoneAirCooled/in");
-  path result = setFileExtension(p,"idf");
+  path p = resourcesPath()/toPath("utilities/Zip/test1");
+  path result = setFileExtension(p,"zip");
   EXPECT_TRUE(boost::filesystem::extension(p).empty());
-  EXPECT_TRUE(toString(boost::filesystem::extension(result)) == std::string(".idf"));
+  EXPECT_TRUE(toString(boost::filesystem::extension(result)) == std::string(".zip"));
   EXPECT_TRUE(boost::filesystem::exists(result));
   EXPECT_TRUE(boost::filesystem::is_regular_file(result));
 
   // passes out path as is if file extension already set
-  p = resourcesPath()/toPath("energyplus/5ZoneAirCooled/in.idf");
-  result = setFileExtension(p,"idf");
-  EXPECT_TRUE(toString(boost::filesystem::extension(p)) == std::string(".idf"));
-  EXPECT_TRUE(toString(boost::filesystem::extension(result)) == std::string(".idf"));
+  p = resourcesPath()/toPath("utilities/Zip/test1.zip");
+  result = setFileExtension(p,"zip");
+  EXPECT_TRUE(toString(boost::filesystem::extension(p)) == std::string(".zip"));
+  EXPECT_TRUE(toString(boost::filesystem::extension(result)) == std::string(".zip"));
 
   // will not replace extension, but will log warning and alert user by returning empty path
-  p = toPath("energyplus/5ZoneAirCooled/in.osm");
+  p = toPath("utilities/Zip/test1.zip");
   result = setFileExtension(p,"idf",false);
   EXPECT_TRUE(result == p);
 
   // will replace extension if asked
-  p = toPath("energyplus/5ZoneAirCooled/in.osm");
+  p = toPath("utilities/Zip/test1.zip");
   result = setFileExtension(p,"idf",true,false);
   EXPECT_TRUE(toString(boost::filesystem::extension(result)) == std::string(".idf"));
 
