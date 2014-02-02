@@ -106,9 +106,16 @@ ENDIF()
 ###############################################################################
 # Additional install commands
 
+
 SET(CPACK_INSTALL_CMAKE_PROJECTS
    "${CMAKE_BINARY_DIR}/OpenStudioCore-prefix/src/OpenStudioCore-build/;Required;ALL;/"
     )
+
+IF (NOT BUILD_CORE_ONLY)
+  LIST(APPEND CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR}/OpenStudio-prefix/src/OpenStudio-build/;Required;ALL;/")
+ENDIF()
+
+
 
 IF(BUILD_SIMXML)
   LIST(APPEND  CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR}/SimXml-prefix/src/SimXml-build/;Required;ALL;/")
